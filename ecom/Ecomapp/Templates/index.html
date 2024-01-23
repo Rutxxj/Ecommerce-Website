@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+{%block body %}
+    <div class="col-md-3 mt-2 p-3 bg-light">
+        <h6>Filter by Category</h6>
+        <hr>
+        <p><a href="/">All </a></p>
+        <p><a href="{%url 'watchList'%}">Watches</a></p>
+        <p><a href="{%url 'mobileList'%}">Mobiles</a></p>
+<!-- ------------------------------------------------------------------------
+                                 filter
+--------------------------------------------------------------------------------   -->      
+        <h6>Filter by Price</h6>
+        <form method="post" action="{%url 'range'%}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="Input1" class="form-label">Minimum:</label>
+            <input type="text" name="min" class="form-control" id="Input1" placeholder="Minimum_Value">
+          </div>
+          <div class="mb-3">
+            <label for="Input2" class="form-label">Maximum</label>
+            <input type="text" name="max" class="form-control" id="Input2" placeholder="Maximum_Value">
+          </div>
+          <a href="/range"><button type="submit" name="range"  class="btn btn-primary">Submit</button></a>
+        </form>
+<!-- ------------------------------------------------------------------------
+                              sort
+--------------------------------------------------------------------------------    -->    
+        <h6>Sort by Size</h6>
+        <hr>
+        <p><a href="/sort">Low to High</a></p>
+        <p><a href="/HightoLow">High to low</a></p>
+    </div>
+<!-- ------------------------------------------------------------------------
+                                   cart
+--------------------------------------------------------------------------------    --> 
+    <div class="col-md-9">
+        <div class="row m-2">
+          {% for x in data %}
+            <div class="col-md-4 mt-2">
+              <div class="card" style="width: 100%; ">
+                <img src="{{x.image.url}}" class="card-img-top" alt="..." style="width: 100%; height:200px;">
+                <hr>
+                <div class="card-body">
+                  <h5 class="card-title" style="text-align: center;">{{x.name}}</h5>
+                  <hr>
+                  <p class="card-title">{{x.category}}<p>
+                  <p class="card-text">{{x.price}}</p>
+                  <p class="card-text">{{x.description}}</p>
+                  <a href="details/{{x.id}}" class="btn btn-primary">view</a>
+                  <a href="/addcart/{{x.id}}"><button type="submit" class="btn btn-danger">Add to card</button></a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+           <!-- ------------------------------------------------------------------------
+                                                search
+           ------------------------------------------------------------------------  -->
+           <div class="col-md-12">
+            <div class="row m-2">
+              {% for x in results %}
+                <div class="col-md-4 mt-2">
+                  <div class="card" style="width: 100%; ">
+                    <img src="{{x.image.url}}" class="card-img-top" alt="..." style="width: 100%; height:200px;">
+                    <hr>
+                    <div class="card-body">
+                      <h5 class="card-title" style="text-align: center;">{{x.name}}</h5>
+                      <hr>
+                      <p class="card-title">{{x.category}}<p>
+                      <p class="card-text">{{x.price}}</p>
+                      <p class="card-text">{{x.description}}</p>
+                      <a href="details/{{x.id}}" class="btn btn-primary">view</a>
+                      <a href="/addcart/{{x.id}}"><button type="submit" class="btn btn-danger">Add to card</button></a>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+        </div>
+      </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% comment %} <div class="col-md-3"><div class="card" style="width: 100%;">
+  <img src="static/images/watch2.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Product 2</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div></div>
+<div class="col-md-3"><div class="card" style="width: 100%;">
+  <img src="static/images/watch3.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Product 3</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div></div>
+</div>
+<div class="row m-2">
+<div class="col-md-3"><div class="card" style="width: 100%;">
+  <img src="static/images/watch4.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Product 4</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div></div>
+<div class="col-md-3"><div class="card" style="width: 100%;">
+  <img src="static/images/watch8.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Product 5</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div></div>
+<div class="col-md-3"><div class="card" style="width: 100%;">
+  <img src="static/images/watch10.jpeg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Product 6</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div></div> {% endcomment %}

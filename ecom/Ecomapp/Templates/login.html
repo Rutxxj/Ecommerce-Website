@@ -1,0 +1,44 @@
+{% extends "Base.html" %}
+{% load static %}
+{% block title %} Login {% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12 m-3 p-3">
+            <h1>Login</h1>
+        </div>
+    </div>
+<!-- -------------------------------------------------------------------------------- -->
+
+    <div class="row">
+        <center>
+        <div class="col-md-8">
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3">   
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+    </center>
+    <div class="row">
+        {% if messages %}
+        {% for c in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{c}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+    </div>
+{% endblock %}
+
+
